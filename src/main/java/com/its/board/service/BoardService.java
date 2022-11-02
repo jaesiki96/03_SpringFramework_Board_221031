@@ -28,13 +28,17 @@ public class BoardService {
         return boardDTOList;
     }
 
+    // 조회수 증가
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
     // 상세 조회
     public BoardDTO findById(Long id) {
-        // 조회수 증가
-        boardRepository.updateHits(id);
         // 상세내용 가져와서 리턴
         return boardRepository.findById(id);
     }
+
     // 수정처리
     public void update(BoardDTO boardDTO) {
         boardRepository.update(boardDTO);

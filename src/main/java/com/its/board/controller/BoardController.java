@@ -43,6 +43,7 @@ public class BoardController {
     // 상세조회 -- 위에 RequestMapping 했기 때문에 GetMapping 만 사용
     @GetMapping
     public String findById(@RequestParam("id") Long id, Model model) {
+        boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
         return "boardPages/boardDetail";
