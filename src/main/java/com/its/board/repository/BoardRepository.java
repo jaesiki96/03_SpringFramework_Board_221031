@@ -38,7 +38,12 @@ public class BoardRepository {
 
     // 2. 상세 내용
     public BoardDTO findById(Long id) {
-        return sql.selectOne("Board.findById", id);
+        BoardDTO boardDTO = sql.selectOne("Board.findById", id);
+        if (boardDTO.getFileAttached() == 1) { // 파일이 있는 상황
+            return sql.selectOne("Board.findByIdFile", id);
+        } else { // 파일이 없으면 board 테이블에서 조회한 것만
+            return boardDTO;
+        }
     }
 
     // 수정 처리

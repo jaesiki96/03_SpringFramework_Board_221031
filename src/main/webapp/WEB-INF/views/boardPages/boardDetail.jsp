@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>boardDetail.jsp</title>
@@ -45,14 +46,17 @@
             <th>contents</th>
             <td>${board.boardContents}</td>
         </tr>
-        <tr>
-            <th>file</th>
-            <td>
-                <%--  servlet-context.xml 에서 "2022-11-02 작업 한 내용", 글 목록에서 첨부 파일 미리보기  --%>
-                <img src="${pageContext.request.contextPath}/upload/${board.storedFileName}"
-                     alt="" width="100" height="100">
-            </td>
-        </tr>
+        <%--  ↓ 아래 c:if 파일이 있을 때는 파일을 미리보기로 보여주고, 없을 때는 안보여주는...  --%>
+        <c:if test="${board.storedFileName != null}">
+            <tr>
+                <th>file</th>
+                <td>
+                        <%--  servlet-context.xml 에서 "2022-11-02 작업 한 내용", 글 목록에서 첨부 파일 미리보기  --%>
+                    <img src="${pageContext.request.contextPath}/upload/${board.storedFileName}"
+                         alt="" width="100" height="100">
+                </td>
+            </tr>
+        </c:if>
     </table>
     <button class="btn btn-primary" onclick="listFn()">목록</button>
     <button class="btn btn-warning" onclick="updateFn()">수정</button>

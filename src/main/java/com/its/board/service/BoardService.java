@@ -41,10 +41,12 @@ public class BoardService {
             boardDTO.setStoredFileName(storedFileName); // 4.
             String savePath = "D:\\spring_img\\" + storedFileName; // 5.
             boardFile.transferTo(new File(savePath)); // 6. 빨간 줄 뜨면 add exception~ 클릭
+            boardDTO.setFileAttached(1); // 플래그? 파일이 있냐
             BoardDTO savedBoard = boardRepository.save(boardDTO); // 7.
             boardRepository.saveFileName(savedBoard);
         } else {
             System.out.println("파일없음");
+            boardDTO.setFileAttached(0); // 파일이 없냐
             boardRepository.save(boardDTO);
         }
     }
