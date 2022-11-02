@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- parameterType 은 안 써도 되지만 쓰는게 좋다
         BoardRepository 와 맞춰야 한다 (만약 Repository 에서 id 를 넘기면 Mapper 에 parameterType 은 Long) -->
-<!-- 아래 keyProperty 는 DB 에서 id -->
-<!-- 아래 useGeneratedKeys="true" keyProperty="id" 를 추가하면 id 값을 자동으로 채워준다 (파일 첨부할 때 필요) -->
-<!-- findById 에서 board_table 과 board_file_table 조인(join) -->
+<!-- 아래 keyProperty 는 DB 에서 id (10번 줄) -->
+<!-- 아래 useGeneratedKeys="true" keyProperty="id" 를 추가하면 id 값을 자동으로 채워준다 (파일 첨부할 때 필요) (10번 줄) -->
+<!-- findById 에서 board_table 과 board_file_table 조인(join) (24~25번 줄)-->
 <mapper namespace="Board">
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
         insert into board_table(boardWriter, boardPass, boardTitle, boardContents)
