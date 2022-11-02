@@ -27,7 +27,7 @@ public class BoardService {
             6. 파일 저장 처리
             7. repository 로 dto 객체 전달
             --------------------------------
-            [우변 작성 후 alt + enter] ↓ 아래
+            [우변 작성 후 alt + enter] ↓ 아래 (34번 줄 부터 = 붙어 있는 항목에 해당)
          */
         if (!boardDTO.getBoardFile().isEmpty()) {
             System.out.println("파일있음");

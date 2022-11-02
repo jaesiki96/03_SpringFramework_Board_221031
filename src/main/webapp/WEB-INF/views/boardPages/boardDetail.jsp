@@ -45,6 +45,14 @@
             <th>contents</th>
             <td>${board.boardContents}</td>
         </tr>
+        <tr>
+            <th>file</th>
+            <td>
+                <%--  servlet-context.xml 에서 "2022-11-02 작업 한 내용", 글 목록에서 첨부 파일 미리보기  --%>
+                <img src="${pageContext.request.contextPath}/upload/${board.storedFileName}"
+                     alt="" width="100" height="100">
+            </td>
+        </tr>
     </table>
     <button class="btn btn-primary" onclick="listFn()">목록</button>
     <button class="btn btn-warning" onclick="updateFn()">수정</button>
