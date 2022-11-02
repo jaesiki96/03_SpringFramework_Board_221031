@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- parameterType 은 안 써도 되지만 쓰는게 좋다
+        BoardRepository 와 맞춰야 한다 (만약 Repository 에서 id 를 넘기면 Mapper 에 parameterType 은 Long) -->
+<mapper namespace="Board">
+    <insert id="save" parameterType="board">
+        insert into board_table(boardWriter, boardPass, boardTitle, boardContents)
+            values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
+    </insert>
+    <select id="findAll" resultType="board">
+        select * from board_table
+    </select>
+    <update id="updateHits" parameterType="Long">
+        update board_table set boardHits = boardHits + 1 where id=#{id}
+    </update>
+    <select id="findById" parameterType="Long" resultType="board">
+        select * from board_table where id=#{id}
+    </select>
+    <select id="update" parameterType="board">
+        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents} where id=#{id}
+    </select>
+</mapper>
