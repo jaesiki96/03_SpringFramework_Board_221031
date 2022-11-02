@@ -58,7 +58,7 @@ public class BoardController {
         return "boardPages/boardUpdate";
     }
 
-    // 수정처리
+    // 수정 처리
     @PostMapping("/update")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         boardService.update(boardDTO);
@@ -69,5 +69,20 @@ public class BoardController {
         BoardDTO dto = boardService.findById(boardDTO.getId());
         model.addAttribute("board", dto);
         return "boardPages/boardDetail";
+    }
+
+    // 삭제 화면 요청
+    @GetMapping("/deleteCheck")
+    public String deleteCheck(@RequestParam("id") Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "boardPages/deleteCheck";
+    }
+
+    // 삭제 처리
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        boardService.delete(id);
+        return "redirect:/board/";
     }
 }

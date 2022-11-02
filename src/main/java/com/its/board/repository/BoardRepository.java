@@ -32,8 +32,14 @@ public class BoardRepository {
     public BoardDTO findById(Long id) {
         return sql.selectOne("Board.findById", id);
     }
-    // 수정처리
+
+    // 수정 처리
     public void update(BoardDTO boardDTO) {
         sql.update("Board.update", boardDTO);
+    }
+
+    // 삭제 처리
+    public void delete(Long id) {
+        sql.delete("Board.delete", id);
     }
 }

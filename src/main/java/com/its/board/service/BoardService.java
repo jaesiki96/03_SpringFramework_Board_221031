@@ -39,9 +39,14 @@ public class BoardService {
         return boardRepository.findById(id);
     }
 
-    // 수정처리
+    // 수정 처리
     public void update(BoardDTO boardDTO) {
         boardRepository.update(boardDTO);
+    }
+
+    // 삭제 처리
+    public void delete(Long id) {
+        boardRepository.delete(id);
     }
 }
 
