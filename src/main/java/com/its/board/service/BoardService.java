@@ -4,7 +4,10 @@ import com.its.board.dto.BoardDTO;
 import com.its.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -12,13 +15,37 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    // 글 작성
-    public boolean save(BoardDTO boardDTO) {
-        int result = boardRepository.save(boardDTO);
-        if (result > 0) {
-            return true;
+    // 글 작성 & 파일 첨부
+    public void save(BoardDTO boardDTO) throws IOException {
+        /*  throw ~ : 아래 transferTo 빨간 줄 클릭하고 생김 -> 위에 1 related problem 클릭하면 repository 넘어가서 빨간 줄 add
+
+            1. BoardDTO 객체에 담긴 파일을 꺼냄
+            2. 파일의 원본 이름을 가져옴 (originalFileName)
+            3. 서버 관리용 이름으로 만듦 (storedFileName)
+            4. originalFileName, storedFileName 을 dto 객체에 담음
+            5. 파일 실제 저장 위치 지정
+            6. 파일 저장 처리
+            7. repository 로 dto 객체 전달
+            --------------------------------
+            [우변 작성 후 alt + enter] ↓ 아래
+         */
+        if (!boardDTO.getBoardFile().isEmpty()) {
+            System.out.println("파일있음");
+            MultipartFile boardFile = boardDTO.getBoardFile(); // 1.
+            String originalFilename = boardFile.getOriginalFilename(); // 2.
+            System.out.println("originalFilename = " + originalFilename);
+            System.out.println(System.currentTimeMillis()); // 1000분의 1 어쩌구 저쩌구 ex) 1667367607372
+            String storedFileName = System.currentTimeMillis() + "-" + originalFilename; // 3. ex) storedFileName = 1667367607372-그림1.png
+            System.out.println("storedFileName = " + storedFileName);
+            boardDTO.setOriginalFileName(originalFilename); // 4.
+            boardDTO.setStoredFileName(storedFileName); // 4.
+            String savePath = "D:\\spring_img\\" + storedFileName; // 5.
+            boardFile.transferTo(new File(savePath)); // 6. 빨간 줄 뜨면 add exception~ 클릭
+            BoardDTO savedBoard = boardRepository.save(boardDTO); // 7.
+            boardRepository.saveFileName(savedBoard);
         } else {
-            return false;
+            System.out.println("파일없음");
+            boardRepository.save(boardDTO);
         }
     }
 

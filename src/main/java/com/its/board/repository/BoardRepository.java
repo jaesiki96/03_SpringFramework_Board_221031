@@ -12,9 +12,17 @@ public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
 
-    // 글 작성
-    public int save(BoardDTO boardDTO) {
-        return sql.insert("Board.save", boardDTO);
+    // 글 작성 & 파일 첨부
+    public BoardDTO save(BoardDTO boardDTO) {
+        System.out.println("insert 전 boardDTO = " + boardDTO);
+        sql.insert("Board.save", boardDTO);
+        System.out.println("insert 후 boardDTO = " + boardDTO);
+        return boardDTO;
+    }
+
+    // 파일
+    public void saveFileName(BoardDTO boardDTO) {
+        sql.insert("Board.saveFile", boardDTO);
     }
 
     // 글 목록 출력
