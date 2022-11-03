@@ -84,7 +84,7 @@
         </c:forEach>
 
         <c:choose>
-            <%--     크거나 같으면 ~~~       --%>
+            <%-- 크거나 같으면 ~~~ --%>
             <c:when test="${paging.page>=paging.maxPage}">
                 <li class="page-item disabled">
                     <a class="page-link">[다음]</a>
