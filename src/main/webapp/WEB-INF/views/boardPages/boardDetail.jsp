@@ -11,10 +11,14 @@
 <head>
     <title>boardDetail.jsp</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.css">
+    <script src="/resources/js/jquery.js"></script>
     <style>
         #detail {
             width: 800px;
             margin-top: 50px;
+        }
+        #comment-write {
+            width: 600px;
         }
     </style>
 </head>
@@ -62,6 +66,19 @@
     <button class="btn btn-warning" onclick="updateFn()">수정</button>
     <button class="btn btn-danger" onclick="deleteFn()">삭제</button>
 </div>
+<div class="container mt-5">
+    <div id="comment-write" class="input-group mb-3">
+        <div class="form-floating">
+            <input type="text" id="commentWriter" class="form-control" placeholder="작성자">
+            <label for="commentWriter">작성자</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" id="commentContents" class="form-control" placeholder="내용">
+            <label for="commentContents">내용</label>
+        </div>
+        <button id="comment-write-btn" class="btn btn-secondary" onclick="commentWrite()">댓글작성</button>
+    </div>
+</div>
 </body>
 <script>
     <%--  목록을 클릭했을 때 마지막으로 봤던 페이지로 돌아가기  --%>
@@ -76,6 +93,27 @@
     const deleteFn = () => {
         const id = '${board.id}';
         location.href = "/board/deleteCheck?id=" + id;
+    }
+    const commentWrite = () => {
+        const writer = document.getElementById("commentWriter").value;
+        const contents = document.getElementById("commentContents").value;
+        const board = '${board.id}';
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            data: {
+                commentWriter: writer,
+                commentContents: contents,
+                boardId: board
+            },
+            dataType: "json", // 리턴 타입
+            success: function (commentList) {
+                console.log(commentList);
+            },
+            error: function () {
+                console.log("실패");
+            }
+        });
     }
 </script>
 </html>
