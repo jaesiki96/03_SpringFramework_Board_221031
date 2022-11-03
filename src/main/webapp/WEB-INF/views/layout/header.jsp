@@ -42,7 +42,7 @@
                     </c:when>
                     <c:otherwise>
                         <button type="button" onclick="login()" class="btn btn-outline-light me-2">Login</button>
-                        <button type="button" class="btn btn-warning">Sign-up</button>
+                        <button type="button" onclick="signUp()" class="btn btn-warning">Sign-up</button>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -56,6 +56,9 @@
     }
     const logout = () => {
         location.href = "/logout";
+    }
+    const signUp = () => {
+        window.location.href = 'https://nid.naver.com/user2/V2Join?m=agree&lang=ko_KR';
     }
 </script>
 </html>
