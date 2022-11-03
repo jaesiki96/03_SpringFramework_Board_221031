@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardRepository {
@@ -54,5 +55,14 @@ public class BoardRepository {
     // 삭제 처리
     public void delete(Long id) {
         sql.delete("Board.delete", id);
+    }
+
+    // 페이징 목록
+    public List<BoardDTO> pagingList(Map<String, Integer> pagingParams) {
+        return sql.selectList("Board.pagingList", pagingParams);
+    }
+    // 페이징 갯수 처리
+    public int boardCount() {
+        return sql.selectOne("Board.boardCount");
     }
 }

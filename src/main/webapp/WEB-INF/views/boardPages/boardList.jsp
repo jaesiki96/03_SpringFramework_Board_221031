@@ -38,7 +38,7 @@
                 </td>
                 <td>${board.boardWriter}</td>
                 <td>
-                    <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+                    <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                 </td>
                 <td>${board.boardHits}</td>
             </tr>
