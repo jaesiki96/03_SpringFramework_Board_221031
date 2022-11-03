@@ -64,6 +64,7 @@
 </div>
 </body>
 <script>
+    <%--  목록을 클릭했을 때 마지막으로 봤던 페이지로 돌아가기  --%>
     const listFn = () => {
         const page = '${page}';
         location.href = "/board/paging?page=" + page;

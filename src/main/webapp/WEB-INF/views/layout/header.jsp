@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
@@ -34,11 +35,27 @@
             </form>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+                <c:choose>
+                    <c:when test="${sessionScope.loginEmail != null}">
+                        <span>${sessionScope.loginEmail}님</span>
+                        <button type="button" onclick="logout()" class="btn btn-outline-light me-2">Logout</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" onclick="login()" class="btn btn-outline-light me-2">Login</button>
+                        <button type="button" class="btn btn-warning">Sign-up</button>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
 </header>
 </body>
+<script>
+    const login = () => {
+        location.href = "/login";
+    }
+    const logout = () => {
+        location.href = "/logout";
+    }
+</script>
 </html>
