@@ -55,10 +55,12 @@ public class BoardController {
 
     // 상세조회 -- 위에 RequestMapping 했기 때문에 GetMapping 만 사용
     @GetMapping
-    public String findById(@RequestParam("id") Long id, Model model) {
+    public String findById(@RequestParam("id") Long id, Model model,
+                           @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
+        model.addAttribute("page", page);
         System.out.println("조회: boardDTO = " + boardDTO);
         return "boardPages/boardDetail";
     }
