@@ -29,7 +29,7 @@
 <%--                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>--%>
 <%--                <li><a href="#" class="nav-link px-2 text-white">About</a></li>--%>
             </ul>
-            <%--      검색어 기능      --%>
+            <%--      검색어 기능  (get)     --%>
             <form action="/board/search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                 <div class="input-group">
                     <select name="type" class="form-select">

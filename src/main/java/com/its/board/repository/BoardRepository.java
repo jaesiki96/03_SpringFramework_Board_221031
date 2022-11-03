@@ -65,4 +65,10 @@ public class BoardRepository {
     public int boardCount() {
         return sql.selectOne("Board.boardCount");
     }
+
+    // 검색 처리
+    // (Mapper 에서 컬럼 이름을 여러개 선택 할 경우 #이 아닌 $를 사용!)
+    public List<BoardDTO> search(Map<String, String> searchParams) {
+        return sql.selectList("Board.search", searchParams);
+    }
 }

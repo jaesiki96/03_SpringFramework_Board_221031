@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/board")
@@ -100,5 +101,14 @@ public class BoardController {
     public String delete(@RequestParam("id") Long id) {
         boardService.delete(id);
         return "redirect:/board/";
+    }
+
+    // 검색 처리
+    @GetMapping("/search")
+    public String search(@RequestParam("type") String type,
+                         @RequestParam("q") String q, Model model) {
+        List<BoardDTO> searchList = boardService.search(type, q);
+        model.addAttribute("boardList", searchList);
+        return "boardPages/boardList";
     }
 }
