@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/board")
@@ -67,7 +66,7 @@ public class BoardController {
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", page);
         System.out.println("조회: boardDTO = " + boardDTO);
-        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        List<CommentDTO> commentDTOList = commentService.findAll(id); // 댓글 기능 추가
         model.addAttribute("commentList", commentDTOList);
         return "boardPages/boardDetail";
     }

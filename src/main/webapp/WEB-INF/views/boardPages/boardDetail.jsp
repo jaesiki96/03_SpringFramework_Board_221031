@@ -80,7 +80,6 @@
         <%-- commentWrite 버튼을 클릭하면 작성자, 내용, 글번호 정보를  --%>
     </div>
 </div>
-</body>
 <div class="container mt-5" id="comment-list">
     <table class="table">
         <tr>
@@ -99,6 +98,7 @@
         </c:forEach>
     </table>
 </div>
+</body>
 <script>
     const commentWrite = () => {
         const writer = document.getElementById("commentWriter").value;
