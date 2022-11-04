@@ -18,8 +18,9 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/save")
-    public @ResponseBody List<CommentDTO> save(@ModelAttribute CommentDTO commentDTO) {
+    public @ResponseBody List<CommentDTO> save(@ModelAttribute CommentDTO commentDTO) { // ajax 사용 시 @ResponseBody
         commentService.save(commentDTO);
-        return null;
+        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getBoardId());
+        return commentDTOList;
     }
 }
